@@ -11,9 +11,37 @@
     	<img src="https://img.shields.io/badge/Version-0.1.3-A897F9?style=for-the-badge" alt="Version">
 </p>
 
+## Usage
+```
+rrep [search] [filename.extension]
+```
+## Example
+```
+Normal [Default case sensitive]
+```
+<img width="1011" alt="screenshot" src="https://user-images.githubusercontent.com/86065741/154854118-d29bb352-6fbf-47a1-b6bf-80b369793b0e.png">
+
+<hr />
+
+```
+Case Insensitive
+```
+
+- set the env variable using `"export CASE=true"`
+  
+<img width="1011" alt="screenshot" src="https://user-images.githubusercontent.com/86065741/154854490-9278b964-18ab-4211-b6a0-b8608875b2c7.png">
+
+## Build
+- note: rust has to be installed
+```sh
+git clone https://github.com/0xlilith/rrep.git
+cd rrep
+cargo build
+```
+
 ## Credits
 ```
 https://github.com/0xlilith
 ```
-### Contributions
+## Contributions
 ###### Any contributions are accepted through PR

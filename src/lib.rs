@@ -5,6 +5,7 @@ author: 0xlilith
 use std::error::Error;
 use std::fs;
 use::std::env;
+use std::process;
 
 pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
     let buf = fs::read_to_string(config.file)?;
@@ -30,13 +31,17 @@ pub struct Config {
 
 impl Config {
     pub fn parse(args: &[String]) -> Result<Config, &str> {
+        if args[1] == "-h" || args[1] == "-help" {
+            menu();
+            process::exit(1);
+        }
         if args.len() < 3 {
             return Err("arguments not satisfied");
         }
         let search = args[1].clone();
         let file = args[2].clone();
-        let case_flag = env::var("CASE_FLAG").is_err();
-    
+        let case_flag = env::var("CASE").is_err();
+        
         Ok(Config {search, file, case_flag})
     }
 }
@@ -65,31 +70,6 @@ pub fn search_cs<'a>(search: &str, contents: &'a str) -> Vec<&'a str> {
     results
 }
 
-#[cfg(test)]
-mod test{
-    use super::*;
-
-    #[test]
-    fn one_result() {
-        let q = "duct";
-        let content = "\
-Rust
-safe, fast, productive
-Pick three
-Duct tape.";
-
-        assert_eq!(vec!["safe, fast, productive"], search(q, content));
-    }
-
-    #[test]
-    fn case_test() {
-        let q = "rUsT";
-        let content = "\
-Rust
-safe, fast, productive
-Pick three
-Trust me.";
-
-        assert_eq!(vec!["Rust", "Trust me."], search_cs(q, content));
-    }
+pub fn menu() {
+    println!("<usage>: rrep [search] [filename.extension]");
 }
