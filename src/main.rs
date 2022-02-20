@@ -11,13 +11,12 @@ fn main() {
     let args: Vec<String> = env::args().collect();
 
     let config = Config::parse(&args).unwrap_or_else(|err| {
-        println!("<error>: {}",err);
+        eprintln!("<error>: {}",err);
         process::exit(1);
     });
 
-    println!("Searching for {}",config.search);
     if let Err(err) = rrep::run(config) {
-        println!("<error>: {}",err);
+        eprintln!("<error>: {}",err);
         process::exit(1);
     };
 }
